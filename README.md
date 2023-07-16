@@ -1,1 +1,3 @@
 # MERN Project
+## Commit Checking
+
