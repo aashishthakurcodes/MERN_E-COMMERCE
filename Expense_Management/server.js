@@ -19,9 +19,7 @@ app.use(cors())
 
 
 //routes
-app.get('/',(req,res)=>{
-    res.send("<h1>Hello world by server side</h1>")
-})
+app.use("/api/v1/users", require("./routes/userRoutes"));
 
 //PORT
 const PORT=8080 || process.env.PORT

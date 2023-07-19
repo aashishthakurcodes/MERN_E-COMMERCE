@@ -16,7 +16,7 @@ const loginControllers = async (req, res) => {
   }
 };
 
-const registerController =async () => {
+const registerController =async (req,res) => {
     try {
         const newUser=new userModal(req.body)
        await newUser.save()

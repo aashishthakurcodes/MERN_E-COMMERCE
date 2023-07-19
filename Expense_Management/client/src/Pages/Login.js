@@ -1,33 +1,34 @@
-import React, { useState } from 'react'
+import React  from 'react'
 import {Form,Input,message} from 'antd'
 import { Link,useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import Loading from '../Component/Layout/Loading'
+import { useState } from 'react'
 
-const Register = () => {
+
+const Login = () => {
     const navigate=useNavigate()
     const [loading,setLoading]=useState(false)
-    const submitHandler=async (values)=>{
-      try {
-        setLoading(true);
-        await axios.post("/users/register", values);
-        message.success("Registeration Successfull");
-        setLoading(false);
-        navigate("/login");
-      } catch (error) {
-        setLoading(false);
-        message.error("something went wrong"+error.message);
-      }
-    }
+    const submitHandler=async(values)=>{
+        try {
+            setLoading(true)
+          const {data}=  await axios.post("users/login",values);
+            message.success("Login Successfully");
+            localStorage.setItem('user',JSON.stringify({...data}))
+            setLoading(false);
+            navigate('/');
+        } catch (error) {
+            setLoading(false)
+            message.error("Something went wrong")
+        }
+        }
   return (
     <>
     <div>
         {loading && <Loading/>}
         <h1>Login/Register</h1>
         <Form layout='vertical' onFinish={submitHandler}>
-            <Form.Item label="Name" name="name">
-                <Input/>
-            </Form.Item>
+            
             <Form.Item label="E-mail" name="email">
                 <Input type='email' required/>
             </Form.Item>
@@ -35,14 +36,15 @@ const Register = () => {
                 <Input type='password' required/>
             </Form.Item>
             <div>
-                <Link to={'/login'}>Already a user</Link>
-                <button>Register</button>
+                <Link to={'/register'}>Not a user? click to register</Link>
+                <button>Login</button>
             </div>
             
         </Form>
     </div>
+    
     </>
   )
 }
 
-export default Register
+export default Login
