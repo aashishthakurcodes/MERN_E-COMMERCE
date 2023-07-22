@@ -4,10 +4,10 @@ const {getAlltransc,addtransec}=require('../controllers/transactionController')
 const router=express.Router()
 
 //Add transec post
-router.post('/add', addtransec)
+router.post('/add-data', addtransec)
 
 //Get transec all data
-router.get('/getall',getAlltransc)
+router.post('/getall',getAlltransc)
 
 
 module.exports=router;
