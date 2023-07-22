@@ -12,8 +12,9 @@ const Homepage = () => {
   const handleSubmit =async (values) => {
    try {
     const user = JSON.parse(localStorage.getItem('user'))
+    console.log("User ID:", user._id); 
     setLoading(true)
-    await axios.post('/transections/add-data',{...values,userid:user._id})
+    await axios.post('/transections/add-data',{...values, userid: user._id})
     setLoading(false)
     message.success("Transaction Added successfully")
     setShow(false)

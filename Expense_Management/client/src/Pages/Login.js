@@ -13,7 +13,9 @@ const Login = () => {
       setLoading(true);
       const { data } = await axios.post("users/login", values);
       message.success("Login Successfully");
-      localStorage.setItem("user", JSON.stringify({ ...data }));
+      localStorage.setItem("user", JSON.stringify({ ...data.user }));
+      console.log(localStorage.getItem("user"));
+      
       setLoading(false);
       navigate("/");
     } catch (error) {

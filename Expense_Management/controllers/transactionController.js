@@ -17,7 +17,7 @@ const getAlltransc=async(req,res)=>{
 //Adding new transec
 const addtransec=async(req,res)=>{
     try {
-   
+        console.log("Received data:", req.body); 
     const newTransec=new transactionModel(req.body)
     await newTransec.save()
     console.log("Received data:", req.body); 
