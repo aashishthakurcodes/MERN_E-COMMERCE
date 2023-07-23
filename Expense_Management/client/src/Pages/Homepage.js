@@ -150,6 +150,7 @@ const Homepage = () => {
               <Select.Option value="medical">Medical</Select.Option>
               <Select.Option value="tax">Tax</Select.Option>
               <Select.Option value="grocery">Grocery</Select.Option>
+              <Select.Option value="Maintenance">Maintenance</Select.Option>
             </Select>
           </Form.Item>
 
