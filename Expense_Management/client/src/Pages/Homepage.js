@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from "react";
+import { UnorderedListOutlined ,AreaChartOutlined,EditOutlined,DeleteOutlined} from '@ant-design/icons'
 import Layout from "../Component/Layout/Layout.js";
 import { Modal, Form, Input, Select, message, Table,DatePicker } from "antd";
 import axios from "axios";
 import Loading from "../Component/Layout/Loading.js";
+import Analytic from "../Component/Layout/Analytic.js";
 const {RangePicker}=DatePicker;
-const moment =require('moment')
+const moment =require('moment');
+
 
 const Homepage = () => {
   const [showModel, setShow] = useState(false);
@@ -13,6 +16,8 @@ const Homepage = () => {
   const[frequency,setFrequency]=useState('7')
   const[selectDate,setSelectDate]=useState([])
   const[type,setType]=useState('all')
+  const[viewData,setViewData]=useState('table')
+  const [editable,setEditable]=useState(null)
 
   //table data
   const columns = [
@@ -39,6 +44,15 @@ const Homepage = () => {
     },
     {
       title: "Actions",
+      render:(text,record)=>(
+        <div>
+          <EditOutlined onClick={()=>{
+            setEditable(record)
+            setShow(true)
+          }} />
+          <DeleteOutlined/>
+        </div>
+      )
     },
   ];
 
@@ -48,14 +62,27 @@ const Homepage = () => {
       const user = JSON.parse(localStorage.getItem("user"));
       console.log("User ID:", user._id);
       setLoading(true);
+     if(editable){
+
+      await axios.post("/transections/edit", {
+       payload:{
+        ...values,userId:user._id
+       },
+       transectionId:editable._id
+      });
+      setLoading(false);
+      message.success("Transaction Edit successfully");
+       
+     }else{
       await axios.post("/transections/add-data", {
         ...values,
         userid: user._id,
-        
       });
       setLoading(false);
       message.success("Transaction Added successfully");
+     }
       setShow(false);
+      setEditable(null)
     } catch (error) {
       setLoading(false);
       message.error("Faild to add transection");
@@ -115,18 +142,23 @@ const Homepage = () => {
         </div>
       </div>
       <div>
+        <UnorderedListOutlined onClick={()=>setViewData('table')}/>
+        <AreaChartOutlined onClick={()=>setViewData('chart')} />
+      </div>
+      <div>
         <button onClick={() => setShow(true)}>Add New </button>
       </div>
       <div className="content">
-        <Table columns={columns} dataSource={getData} />
+        {viewData === 'table' ?  <Table columns={columns} dataSource={getData} /> : <Analytic  getData={getData}/>}
+       
       </div>
       <Modal
-        title="Add Transection"
+        title={editable ? "Edit Transection" : "Add New Transection"}
         open={showModel}
         onCancel={() => setShow(false)}
         footer={false}
       >
-        <Form layout="vertical" onFinish={handleSubmit}>
+        <Form layout="vertical" onFinish={handleSubmit} initialValues={editable}>
           <Form.Item label="Amount" name="amount">
             <Input type="text" />
           </Form.Item>
