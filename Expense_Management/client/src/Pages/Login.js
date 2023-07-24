@@ -4,6 +4,8 @@ import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import Loading from "../Component/Layout/Loading";
 import { useState } from "react";
+ import './login.css'
+ import img1 from  "../Images/depositphotos_515228796-stock-illustration-online-registration-sign-login-account.jpg"
 
 const Login = () => {
   const navigate = useNavigate();
@@ -15,15 +17,13 @@ const Login = () => {
       message.success("Login Successfully");
       localStorage.setItem("user", JSON.stringify({ ...data.user }));
       console.log(localStorage.getItem("user"));
-      
+
       setLoading(false);
       navigate("/");
     } catch (error) {
       setLoading(false);
       message.error("Something went wrong");
     }
-
-
   };
   useEffect(() => {
     if (localStorage.getItem("user")) {
@@ -31,24 +31,45 @@ const Login = () => {
     }
   }, [navigate]);
 
-
   return (
     <>
       <div>
-        {loading && <Loading />}
-        <h1>Login/Register</h1>
-        <Form layout="vertical" onFinish={submitHandler}>
-          <Form.Item label="E-mail" name="email">
-            <Input type="email" required />
-          </Form.Item>
-          <Form.Item label="Password" name="password">
-            <Input type="password" required />
-          </Form.Item>
-          <div>
-            <Link to={"/register"}>Not a user? click to register</Link>
-            <button>Login</button>
+      {loading && (
+          
+          <div className="loading-container">
+            <Loading />
           </div>
-        </Form>
+        )}
+        
+        <div className="container_login">
+          <h1>Login</h1>
+          <div className="login_form">
+
+            <div className="login_img">
+              <img className="loginimg" src={img1} alt="loginimg"/>
+            </div>
+            
+            
+          <Form layout="vertical" onFinish={submitHandler} className="form">
+          <div className="login_data">
+            <Form.Item label="E-mail" name="email" className="input_label">
+              <Input type="email" required />
+            </Form.Item>
+            <Form.Item  className="input_label" label="Password" name="password">
+              <Input type="password" required />
+            </Form.Item>
+            </div>
+            <div className="register_login">
+              <Link className="input_label" to={"/register"}>New User ? Click to register</Link>
+              <button className="login_btn">Login</button>
+            </div>
+          </Form>
+         
+      
+         
+
+          </div>
+        </div>
       </div>
     </>
   );
