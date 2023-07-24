@@ -2,6 +2,20 @@ import React from "react";
 import { Progress } from "antd";
 
 const Analytic = ({ getData }) => {
+  //Categories wise Data
+  const categories = [
+    "salary",
+    "food",
+    "bills",
+    "miscellaneous",
+    "fees",
+    "rent",
+    "medical",
+    "tax",
+    "grocery",
+    "Maintenance",
+  ];
+
   const totalTransec = getData.length;
   const totalIncometransec = getData.filter(
     (transection) => transection.type === "income"
@@ -69,6 +83,46 @@ const Analytic = ({ getData }) => {
               />
             </div>
           </div>
+        </div>
+      </div>
+      <div className="categroy">
+        <div>
+            <h2>Categories wise income</h2>
+            {
+                categories.map(category=>{
+                    const amount=getData.filter(transection=>transection.type === 'income' && transection.category === category).reduce((acc,transection)=> acc + transection.amount,0)
+                    return(
+                        amount> 0 &&(
+                        <div>
+                            <div>
+                                <h3>{category}</h3>
+                                <Progress percent={((amount/totalIncomeTurnover)*100).toFixed(0)}/>
+                            </div>
+                        </div>
+                    )
+                    )
+                })
+            }
+        </div>
+
+
+        <div>
+            <h2>Categories wise expense</h2>
+            {
+                categories.map(category=>{
+                    const amount=getData.filter(transection=>transection.type === 'expense' && transection.category === category).reduce((acc,transection)=> acc + transection.amount,0)
+                    return(
+                        amount> 0 &&(
+                        <div>
+                            <div>
+                                <h3>{category}</h3>
+                                <Progress strokeColor={"red"} percent={((amount/totalExpenseTurnover)*100).toFixed(0)}/>
+                            </div>
+                        </div>
+                    )
+                    )
+                })
+            }
         </div>
       </div>
     </div>

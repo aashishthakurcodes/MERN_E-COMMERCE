@@ -1,5 +1,5 @@
 const express=require('express')
-const {getAlltransc,addtransec,edittransection}=require('../controllers/transactionController')
+const {getAlltransc,addtransec,edittransection,deletetransection}=require('../controllers/transactionController')
 
 const router=express.Router()
 
@@ -12,6 +12,9 @@ router.post('/getall',getAlltransc)
 
 //Get  Edit Traansection
 router.post('/edit',edittransection)
+
+//Get  delete Traansection
+router.post('/delete',deletetransection)
 
 
 module.exports=router;

@@ -50,7 +50,7 @@ const Homepage = () => {
             setEditable(record)
             setShow(true)
           }} />
-          <DeleteOutlined/>
+          <DeleteOutlined onClick={()=>{handleDelete(record)}}/>
         </div>
       )
     },
@@ -111,6 +111,20 @@ const Homepage = () => {
     };
     getAlltransec();
   }, [frequency,selectDate,type]);
+
+//Delete item
+const handleDelete=async(record)=>{
+try {
+  setLoading(true)
+  await axios.post("/transections/delete",{transectionId:record._id,})
+  setLoading(false)
+  message.success("Transection  deleted successfully")
+} catch (error) {
+  console.log(error)
+  setLoading(false)
+  message.error("Unable to delete")
+}
+}
 
   return (
     <Layout>
