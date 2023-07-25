@@ -29,12 +29,17 @@ const Register = () => {
   }, [navigate]);
   return (
     <>
-      <div>
-        {loading && <Loading />}
+      <div className="main_container2">
+      {loading && (
+          
+          <div className="loading-container">
+            <Loading />
+          </div>
+        )}
         <div className="reg_container">
 
           <div>
-            <h1>Login/Register</h1>
+            <h1>Register</h1>
           </div>
         <div className="register">
           <div className="img_reg">
@@ -42,6 +47,7 @@ const Register = () => {
           </div>
 
           <div className="form_reg">
+            <div className="form_main">
             <Form layout="vertical" onFinish={submitHandler}>
               <Form.Item label="Name" name="name">
                 <Input />
@@ -52,11 +58,12 @@ const Register = () => {
               <Form.Item label="Password" name="password">
                 <Input type="password" required />
               </Form.Item>
-              <div>
-                <Link to={"/login"}>Already a user</Link>
-                <button>Register</button>
+              <div className="register_main">
+                <Link to={"/login"}>Already a user ? <span className="span_data">Log in</span></Link>
+                <button className="reg_btn">Register</button>
               </div>
             </Form>
+            </div>
           </div>
           </div>
         </div>

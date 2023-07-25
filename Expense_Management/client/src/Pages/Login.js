@@ -32,7 +32,7 @@ const Login = () => {
 
   return (
     <>
-      <div>
+      <div className="main_container">
       {loading && (
           
           <div className="loading-container">
@@ -59,7 +59,7 @@ const Login = () => {
             </Form.Item>
             </div>
             <div className="register_login">
-              <Link className="input_label" to={"/register"}>New User ? Click to register</Link>
+              <Link className="input_label" to={"/register"}>New User ?  <span className="span_data">Click to Register</span></Link>
               <button className="login_btn">Login</button>
             </div>
           </Form>
