@@ -1,0 +1,51 @@
+.filters{
+    /* border: 5px solid red; */
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background: #4e4a4a;
+    color: #ffff;
+    padding: 10px;
+}
+.filters Select {
+    width: 80px;
+    border: 2px solid blue;
+  }
+  .charts{
+    /* border: 2px solid greenyellow; */
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    gap: 30px;
+    /* flex-direction: column; */
+  }
+  .content{
+    border: 3px solid red;
+    width: 80%;
+  }
+  .userData{
+    border: 2px solid blue;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .frequency{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    /* border: 2px solid red; */
+    gap: 5px;
+  }
+  .addbtn{
+    background: rgb(52, 52, 235);
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    color:#ffff;
+    font-weight: 600;
+    cursor: pointer;
+  }
+  .addbtn:hover{
+    background: rgb(101, 101, 214);
+  }

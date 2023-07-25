@@ -1,30 +1,35 @@
 import React, { useState, useEffect } from "react";
-import { UnorderedListOutlined ,AreaChartOutlined,EditOutlined,DeleteOutlined} from '@ant-design/icons'
+import {
+  UnorderedListOutlined,
+  AreaChartOutlined,
+  EditOutlined,
+  DeleteOutlined,
+} from "@ant-design/icons";
 import Layout from "../Component/Layout/Layout.js";
-import { Modal, Form, Input, Select, message, Table,DatePicker } from "antd";
+import { Modal, Form, Input, Select, message, Table, DatePicker } from "antd";
 import axios from "axios";
 import Loading from "../Component/Layout/Loading.js";
 import Analytic from "../Component/Layout/Analytic.js";
-const {RangePicker}=DatePicker;
-const moment =require('moment');
-
+import "./Homepage.css";
+const { RangePicker } = DatePicker;
+const moment = require("moment");
 
 const Homepage = () => {
   const [showModel, setShow] = useState(false);
   const [loading, setLoading] = useState(false);
   const [getData, setData] = useState([]);
-  const[frequency,setFrequency]=useState('7')
-  const[selectDate,setSelectDate]=useState([])
-  const[type,setType]=useState('all')
-  const[viewData,setViewData]=useState('table')
-  const [editable,setEditable]=useState(null)
+  const [frequency, setFrequency] = useState("7");
+  const [selectDate, setSelectDate] = useState([]);
+  const [type, setType] = useState("all");
+  const [viewData, setViewData] = useState("table");
+  const [editable, setEditable] = useState(null);
 
   //table data
   const columns = [
     {
       title: "Date",
       dataIndex: "date",
-      render:(text)=><span>{moment(text).format('YYYY-MM-DD')}</span>
+      render: (text) => <span>{moment(text).format("YYYY-MM-DD")}</span>,
     },
     {
       title: "Amount",
@@ -44,15 +49,21 @@ const Homepage = () => {
     },
     {
       title: "Actions",
-      render:(text,record)=>(
+      render: (text, record) => (
         <div>
-          <EditOutlined onClick={()=>{
-            setEditable(record)
-            setShow(true)
-          }} />
-          <DeleteOutlined onClick={()=>{handleDelete(record)}}/>
+          <EditOutlined
+            onClick={() => {
+              setEditable(record);
+              setShow(true);
+            }}
+          />
+          <DeleteOutlined
+            onClick={() => {
+              handleDelete(record);
+            }}
+          />
         </div>
-      )
+      ),
     },
   ];
 
@@ -62,34 +73,33 @@ const Homepage = () => {
       const user = JSON.parse(localStorage.getItem("user"));
       console.log("User ID:", user._id);
       setLoading(true);
-     if(editable){
-
-      await axios.post("/transections/edit", {
-       payload:{
-        ...values,userId:user._id
-       },
-       transectionId:editable._id
-      });
-      setLoading(false);
-      message.success("Transaction Edit successfully");
-       
-     }else{
-      await axios.post("/transections/add-data", {
-        ...values,
-        userid: user._id,
-      });
-      setLoading(false);
-      message.success("Transaction Added successfully");
-     }
+      if (editable) {
+        await axios.post("/transections/edit", {
+          payload: {
+            ...values,
+            userId: user._id,
+          },
+          transectionId: editable._id,
+        });
+        setLoading(false);
+        message.success("Transaction Edit successfully");
+      } else {
+        await axios.post("/transections/add-data", {
+          ...values,
+          userid: user._id,
+        });
+        setLoading(false);
+        message.success("Transaction Added successfully");
+      }
       setShow(false);
-      setEditable(null)
+      setEditable(null);
     } catch (error) {
       setLoading(false);
       message.error("Faild to add transection");
     }
   };
   //getall data
-  
+
   //Useeffect hook
   useEffect(() => {
     const getAlltransec = async () => {
@@ -98,8 +108,9 @@ const Homepage = () => {
         setLoading(true);
         const res = await axios.post("/transections/getall", {
           userid: user._id,
-          frequency,selectDate,type
-          
+          frequency,
+          selectDate,
+          type,
         });
         setLoading(false);
         setData(res.data);
@@ -110,69 +121,101 @@ const Homepage = () => {
       }
     };
     getAlltransec();
-  }, [frequency,selectDate,type]);
+  }, [frequency, selectDate, type]);
 
-//Delete item
-const handleDelete=async(record)=>{
-try {
-  setLoading(true)
-  await axios.post("/transections/delete",{transectionId:record._id,})
-  setLoading(false)
-  message.success("Transection  deleted successfully")
-} catch (error) {
-  console.log(error)
-  setLoading(false)
-  message.error("Unable to delete")
-}
-}
+  //Delete item
+  const handleDelete = async (record) => {
+    try {
+      setLoading(true);
+      await axios.post("/transections/delete", { transectionId: record._id });
+      setLoading(false);
+      message.success("Transection  deleted successfully");
+    } catch (error) {
+      console.log(error);
+      setLoading(false);
+      message.error("Unable to delete");
+    }
+  };
 
   return (
     <Layout>
-      {loading && <Loading />}
+      {loading && (
+        <div className="loading-container">
+          <Loading />
+        </div>
+      )}
       <div className="filters">
-        <div>
-          filteritems
-          <Select value={frequency} onChange={(values)=>setFrequency(values)}>
-            <Select.Option value="7">Last 1 Week</Select.Option>
-            <Select.Option value="30">Last 1 month</Select.Option>
-            <Select.Option value="365">Last 1 Year</Select.Option>
-            <Select.Option value="custom">Custom</Select.Option>
-          </Select>
+        <div className="frequency">
+          <div>Select requency</div>
 
-         {frequency === 'custom' && <RangePicker value={selectDate} onChange={(values)=>setSelectDate(values)} />}
+          <div>
+            <Select
+              value={frequency}
+              onChange={(values) => setFrequency(values)}
+            >
+              <Select.Option value="7">Last 1 Week</Select.Option>
+              <Select.Option value="30">Last 1 month</Select.Option>
+              <Select.Option value="365">Last 1 Year</Select.Option>
+              <Select.Option value="custom">Custom</Select.Option>
+            </Select>
+          </div>
+          {frequency === "custom" && (
+            <RangePicker
+              value={selectDate}
+              onChange={(values) => setSelectDate(values)}
+            />
+          )}
         </div>
 
-
-        <div>
-          Types
-          <Select value={type} onChange={(values)=>setType(values)}>
+        <div  className="frequency">
+          <div>Select Type</div>
+          <div>
+          <Select value={type} onChange={(values) => setType(values)}>
             <Select.Option value="all">All</Select.Option>
             <Select.Option value="income">Income</Select.Option>
             <Select.Option value="expense">Expense</Select.Option>
-           
           </Select>
+          </div>
+        </div>
 
+        <div className="charts">
+          <div>
+            <UnorderedListOutlined onClick={() => setViewData("table")} />
+            </div>
+            <div>
+            <AreaChartOutlined onClick={() => setViewData("chart")} />
+            </div>
+          
          
         </div>
+
+
+        <div>
+            <button className="addbtn" onClick={() => setShow(true)}>Add New </button>
+          </div>
       </div>
-      <div>
-        <UnorderedListOutlined onClick={()=>setViewData('table')}/>
-        <AreaChartOutlined onClick={()=>setViewData('chart')} />
+
+      <div className="userData">
+        <div className="content">
+          {viewData === "table" ? (
+            <Table columns={columns} dataSource={getData} />
+          ) : (
+            <Analytic getData={getData} />
+          )}
+        </div>
       </div>
-      <div>
-        <button onClick={() => setShow(true)}>Add New </button>
-      </div>
-      <div className="content">
-        {viewData === 'table' ?  <Table columns={columns} dataSource={getData} /> : <Analytic  getData={getData}/>}
-       
-      </div>
+
       <Modal
         title={editable ? "Edit Transection" : "Add New Transection"}
         open={showModel}
         onCancel={() => setShow(false)}
         footer={false}
       >
-        <Form layout="vertical" onFinish={handleSubmit} initialValues={editable}>
+        <Form
+          layout="vertical"
+          onFinish={handleSubmit}
+          initialValues={editable}
+        >
           <Form.Item label="Amount" name="amount">
             <Input type="text" />
           </Form.Item>

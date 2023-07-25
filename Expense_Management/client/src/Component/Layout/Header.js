@@ -1,11 +1,13 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { message } from "antd";
+import './Header.css'
+import img3 from '../../Images/images.png'
 
 const Header = () => {
   const [loginUser, setLoginUser] = useState("");
   const navigate = useNavigate();
-  
+
   useEffect(() => {
     const user = JSON.parse(localStorage.getItem("user"));
     if (user) {
@@ -20,19 +22,19 @@ const Header = () => {
   };
   return (
     <div>
-        <h1>Hedaer sectioon</h1>
-        <div>
-        <li className="nav-item">
-                {" "}
-                <p className="nav-link">{loginUser && loginUser.name}</p>{" "}
-              </li></div>
-
-              <div>
-                <button onClick={logoutHandler}>LogOut</button>
-              </div>
+      <nav className="main">
     
-    </div>
-  )
-}
+        <div className="logo-container"><img className="logo" src={img3} alt="logo"/></div>
 
-export default Header
+        <div>
+        <button className="logout_btn" onClick={logoutHandler}>Logout</button>
+        </div>
+      </nav>
+      <div className="container">
+          <span>Welcome {loginUser && loginUser.name}</span>
+        </div>
+    </div>
+  );
+};
+
+export default Header;

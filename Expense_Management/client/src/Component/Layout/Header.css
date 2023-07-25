@@ -1,0 +1,34 @@
+.main
+{
+    border: 2px solid red;
+    display: flex;
+    justify-content: space-between;
+    padding: 0px 30px;
+    align-items: center;
+    /* background: rgba(0, 0, 0, 0.8); */
+    color: #ffff;
+}
+.container{
+    border: 3px solid yellow;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+  
+  .logo {
+    max-width: 100%;
+    height: 80px;
+  }
+  .logout_btn{
+    background: rgb(52, 52, 235);
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    color:#ffff;
+    font-weight: 600;
+    cursor: pointer;
+  }
+  .logout_btn:hover{
+    background: rgb(107, 107, 209); 
+  }

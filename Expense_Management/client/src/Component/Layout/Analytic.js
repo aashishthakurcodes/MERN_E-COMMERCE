@@ -1,5 +1,6 @@
 import React from "react";
 import { Progress } from "antd";
+import "../analytic.css";
 
 const Analytic = ({ getData }) => {
   //Categories wise Data
@@ -43,13 +44,20 @@ const Analytic = ({ getData }) => {
   const totalExpenseTurnoverPer = (totalExpenseTurnover / totalTurnOver) * 100;
   return (
     <div>
+      {/* div _01 */}
       <h1>Analytics</h1>
-      <h2>Total Transection={totalTransec}</h2>
-      <div>
-        <h2>Total Income :{totalIncometransec.length}</h2>
-        <h2>Total Expense :{totalExpensetransec.length}</h2>
-        //Progress bar
-        <div>
+      <div className="wrapper">
+      <div className="progress_01">
+        <div className="progress_main">
+          <span className="heading_graph">
+            Total Transection={totalTransec}
+          </span>
+        </div>
+        <div className="progress_cont">
+          <span>Total Income :{totalIncometransec.length}</span>
+          <span>Total Expense :{totalExpensetransec.length}</span>
+        </div>
+        <div className="progress_cont">
           <Progress
             type="dashboard"
             strokeColor={"green"}
@@ -60,71 +68,102 @@ const Analytic = ({ getData }) => {
             strokeColor={"red"}
             percent={totalExpenseper.toFixed(0)}
           />
+        </div>
+      </div>
 
-          <div>
-            <h2>Total Turnover={totalTurnOver}</h2>
-            <div>
-              <h2>Total Income TurnOver :{totalIncomeTurnover}</h2>
-              <h2>Total Expense TurnOver :{totalExpenseTurnover}</h2>
-            </div>
-
-            {/* Progress bar */}
-            <h3>Progress bar</h3>
-            <div>
-              <Progress
-                type="dashboard"
-                strokeColor={"green"}
-                percent={totalIncomeTurnoverPer.toFixed(0)}
-              />
-              <Progress
-                type="dashboard"
-                strokeColor={"red"}
-                percent={totalExpenseTurnoverPer.toFixed(0)}
-              />
-            </div>
+      {/* div_02 */}
+   
+        <div className="progress_01">
+          <div className="progress_main">
+            <span className="heading_graph">
+              Total Turnover={totalTurnOver}
+            </span>
+          </div>
+          <div className="progress_cont">
+            <span> Income TurnOver :{totalIncomeTurnover}</span>
+            <span> Expense TurnOver :{totalExpenseTurnover}</span>
+          </div>
+          <div className="progress_cont">
+            <Progress
+              type="dashboard"
+              strokeColor={"green"}
+              percent={totalIncomeTurnoverPer.toFixed(0)}
+            />
+            <Progress
+              type="dashboard"
+              strokeColor={"red"}
+              percent={totalExpenseTurnoverPer.toFixed(0)}
+            />
           </div>
         </div>
-      </div>
+        </div>
+
+        {/* div -03 */}
+        
       <div className="categroy">
-        <div>
-            <h2>Categories wise income</h2>
-            {
-                categories.map(category=>{
-                    const amount=getData.filter(transection=>transection.type === 'income' && transection.category === category).reduce((acc,transection)=> acc + transection.amount,0)
-                    return(
-                        amount> 0 &&(
-                        <div>
-                            <div>
-                                <h3>{category}</h3>
-                                <Progress percent={((amount/totalIncomeTurnover)*100).toFixed(0)}/>
-                            </div>
-                        </div>
-                    )
-                    )
-                })
-            }
+        <div className="category_data">
+          <div className="progress_main">
+          <h2>Categories wise income</h2>
+          </div>
+          {categories.map((category) => {
+            const amount = getData
+              .filter(
+                (transection) =>
+                  transection.type === "income" &&
+                  transection.category === category
+              )
+              .reduce((acc, transection) => acc + transection.amount, 0);
+            return (
+              amount > 0 && (
+                <div className="main_category" >
+                  <div className="target">
+                    <h3>{category}</h3>
+                    <Progress
+                      percent={((amount / totalIncomeTurnover) * 100).toFixed(
+                        0
+                      )}
+                    />
+                  </div>
+                </div>
+              )
+            );
+          })}
+        </div>
         </div>
 
-
-        <div>
-            <h2>Categories wise expense</h2>
-            {
-                categories.map(category=>{
-                    const amount=getData.filter(transection=>transection.type === 'expense' && transection.category === category).reduce((acc,transection)=> acc + transection.amount,0)
-                    return(
-                        amount> 0 &&(
-                        <div>
-                            <div>
-                                <h3>{category}</h3>
-                                <Progress strokeColor={"red"} percent={((amount/totalExpenseTurnover)*100).toFixed(0)}/>
-                            </div>
-                        </div>
-                    )
-                    )
-                })
-            }
+ {/* Expense */}
+         <div className="categroy">
+        <div className="category_data">
+          <div className="progress_main">
+          <h2>Categories wise Expense</h2>
+          </div>
+          {categories.map((category) => {
+            const amount = getData
+              .filter(
+                (transection) =>
+                  transection.type === "income" &&
+                  transection.category === category
+              )
+              .reduce((acc, transection) => acc + transection.amount, 0);
+            return (
+              amount > 0 && (
+                <div className="main_category" >
+                  <div className="target">
+                    <h3>{category}</h3>
+                    <Progress
+                    strokeColor={"red"}
+                      percent={((amount / totalIncomeTurnover) * 100).toFixed(
+                        0
+                      )}
+                    />
+                  </div>
+                </div>
+              )
+            );
+          })}
         </div>
-      </div>
+        </div>
+      
     </div>
   );
 };
