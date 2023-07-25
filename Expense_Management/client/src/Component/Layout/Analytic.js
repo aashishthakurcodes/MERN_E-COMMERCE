@@ -45,7 +45,7 @@ const Analytic = ({ getData }) => {
   return (
     <div>
       {/* div _01 */}
-      <h1>Analytics</h1>
+      <h3>Graph Analytics</h3>
       <div className="wrapper">
       <div className="progress_01">
         <div className="progress_main">

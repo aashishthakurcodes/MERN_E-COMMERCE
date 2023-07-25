@@ -146,7 +146,7 @@ const Homepage = () => {
       )}
       <div className="filters">
         <div className="frequency">
-          <div>Select requency</div>
+          <div>Select Frequency</div>
 
           <div>
             <Select

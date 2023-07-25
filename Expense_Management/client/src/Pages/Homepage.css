@@ -1,51 +1,61 @@
-.filters{
-    /* border: 5px solid red; */
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    background: #4e4a4a;
-    color: #ffff;
-    padding: 10px;
+/* Homepage.css */
+.filters {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 20px;
+  background-color: #f0f0f0;
+  align-items: center;
 }
-.filters Select {
-    width: 80px;
-    border: 2px solid blue;
+
+.frequency,
+.charts,
+.addbtn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.filters .frequency,
+.filters .charts,
+.filters .addbtn {
+  flex-basis: 100%;
+}
+
+@media screen and (min-width: 768px) {
+  /* Adjust the layout for larger screens */
+  .filters {
+    flex-direction: row;
+    
+    
   }
-  .charts{
-    /* border: 2px solid greenyellow; */
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    gap: 30px;
-    /* flex-direction: column; */
+
+  .filters .frequency,
+  .filters .charts,
+  .filters .addbtn {
+    flex-basis: auto;
+   gap: 10px;
   }
-  .content{
-    border: 3px solid red;
-    width: 80%;
+
+  .frequency {
+    gap: 20px;
   }
-  .userData{
-    border: 2px solid blue;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+
+  .charts {
+    margin-left: auto;
   }
-  .frequency{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    /* border: 2px solid red; */
-    gap: 5px;
-  }
-  .addbtn{
-    background: rgb(52, 52, 235);
-    border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    color:#ffff;
-    font-weight: 600;
-    cursor: pointer;
-  }
-  .addbtn:hover{
-    background: rgb(101, 101, 214);
-  }
+}
+
+.userData {
+  padding: 20px;
+}
+
+.content {
+  overflow-x: auto;
+}
+.ant-table-thead > tr > th,
+.ant-table-tbody > tr > td {
+  white-space: nowrap;
+}
+
+/* Add more responsive styling as needed */
