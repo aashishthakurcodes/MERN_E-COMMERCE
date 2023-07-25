@@ -5,8 +5,7 @@ import axios from "axios";
 import Loading from "../Component/Layout/Loading";
 import { useState } from "react";
  import './login.css'
- import img1 from  "../Images/depositphotos_515228796-stock-illustration-online-registration-sign-login-account.jpg"
-
+ import img1 from  "../Images/computer-login-concept-illustration_114360-7892.avif"
 const Login = () => {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);

@@ -1,0 +1,23 @@
+.reg_container{
+    border: 3px solid red;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.register{
+    border: 3px solid red;
+    display: flex;
+    flex-direction: row-reverse;
+}
+.img_reg{
+    border: 3px solid green;
+    width: 50%;
+}
+.form_reg{
+    border: 3px solid blue;
+    width: 50%;
+}
+.img2{
+    width: 100%;
+}
