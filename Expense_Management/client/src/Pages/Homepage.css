@@ -1,58 +1,83 @@
+/* Homepage.css */
+
+.homepage{
+  border: 2px solid red;
+  overflow: hidden;
+  margin-top: 15px; 
+}
 .filters {
-  position: sticky;
-  top: 0;
-  z-index: 1;
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  flex-direction: column;
+  gap: 10px;
   padding: 20px;
   background-color: #f0f0f0;
-}
-
-.userData {
-  padding-top: 80px; /* Adjust the padding to create space for filters and user welcome msg */
-  height: calc(100vh - 80px); /* Set the height of the userData container */
-  overflow-y: scroll; /* Make the userData container scrollable */
-}
-
-.frequency {
-  display: flex;
   align-items: center;
-  gap: 10px;
+  /* border: 2px solid red; */
 }
 
-.charts {
-  display: flex;
-  gap: 10px;
-}
-
+.frequency,
+.charts,
 .addbtn {
-  background: rgb(52, 52, 235);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* border: 2px solid rgb(0, 102, 255); */
+  gap: 10px;
+}
+
+.filters .frequency,
+.filters .charts,
+.filters .addbtn {
+  flex-basis: 100%;
+}
+.charts{
+  gap: 20px;
+}
+.addbtn{
+  background: rgb(54, 124, 216);
+  color: #ffff;
+  padding: 8px 10px;
   border: none;
-  padding: 10px 20px;
   border-radius: 5px;
-  color: #fff;
-  font-weight: 600;
   cursor: pointer;
 }
-
-.addbtn:hover {
-  background: rgb(107, 107, 209);
+.addbtn:hover{
+  background: rgb(102, 158, 233);
 }
 
-/* Fix filters and user welcome msg at the top */
+@media screen and (min-width: 768px) {
+  /* Adjust the layout for larger screens */
+  .filters {
+    flex-direction: row;
+  }
+
+  .filters .frequency,
+  .filters .charts,
+  .filters .addbtn {
+    flex-basis: auto;
+   gap: 10px;
+  }
+
+  .frequency {
+    gap: 20px;
+  }
+
+  .charts {
+    margin-left: auto;
+    
+  }
+}
+
 .userData {
-  padding-top: 80px; /* Adjust the padding to create space for filters and user welcome msg */
-}
-
-.welcome-msg {
-  text-align: center;
-  font-size: 18px;
-  font-weight: bold;
-  margin-bottom: 10px;
+  padding: 20px;
 }
 
 .content {
-  overflow-y: auto; /* Make the table scrollable */
-  max-height: calc(100vh - 200px); /* Adjust the height based on your layout and filters height */
+  overflow-x: auto;
 }
+.ant-table-thead > tr > th,
+.ant-table-tbody > tr > td {
+  white-space: nowrap;
+}
+
+/* Add more responsive styling as needed */

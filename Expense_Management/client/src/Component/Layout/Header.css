@@ -7,10 +7,13 @@
   box-shadow: -1px 24px 25px -12px rgba(0, 0, 0, 0.75);
   display: flex;
   justify-content: space-between;
+  overflow: hidden;
   
   align-items: center;
   /* background: rgba(0, 0, 0, 0.8); */
   color: #ffff;
+  background:#ffff;
+
 }
 
 .container {
@@ -19,7 +22,9 @@
   justify-content: center;
   align-items: center;
   margin-top: 20px;
-  padding-top: 80px; /* Add some top padding to create space for the fixed header */
+  padding-top: 80px;
+  
+  
 }
 
 .logo {

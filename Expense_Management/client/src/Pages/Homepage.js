@@ -148,6 +148,7 @@ const Homepage = () => {
           <Loading />
         </div>
       )}
+      <div className="homepage">
       <div className="filters">
         <div className="frequency">
           <div>Select Frequency</div>
@@ -198,7 +199,7 @@ const Homepage = () => {
             <button className="addbtn" onClick={() => setShow(true)}>Add New </button>
           </div>
       </div>
-
+      </div>
       <div className="userData">
         <div className="content">
           {viewData === "table" ? (
