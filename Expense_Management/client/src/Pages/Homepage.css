@@ -1,61 +1,58 @@
-/* Homepage.css */
 .filters {
+  position: sticky;
+  top: 0;
+  z-index: 1;
   display: flex;
-  flex-direction: column;
-  gap: 10px;
+  justify-content: space-between;
+  align-items: center;
   padding: 20px;
   background-color: #f0f0f0;
-  align-items: center;
-}
-
-.frequency,
-.charts,
-.addbtn {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.filters .frequency,
-.filters .charts,
-.filters .addbtn {
-  flex-basis: 100%;
-}
-
-@media screen and (min-width: 768px) {
-  /* Adjust the layout for larger screens */
-  .filters {
-    flex-direction: row;
-    
-    
-  }
-
-  .filters .frequency,
-  .filters .charts,
-  .filters .addbtn {
-    flex-basis: auto;
-   gap: 10px;
-  }
-
-  .frequency {
-    gap: 20px;
-  }
-
-  .charts {
-    margin-left: auto;
-  }
 }
 
 .userData {
-  padding: 20px;
+  padding-top: 80px; /* Adjust the padding to create space for filters and user welcome msg */
+  height: calc(100vh - 80px); /* Set the height of the userData container */
+  overflow-y: scroll; /* Make the userData container scrollable */
+}
+
+.frequency {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.charts {
+  display: flex;
+  gap: 10px;
+}
+
+.addbtn {
+  background: rgb(52, 52, 235);
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  color: #fff;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.addbtn:hover {
+  background: rgb(107, 107, 209);
+}
+
+/* Fix filters and user welcome msg at the top */
+.userData {
+  padding-top: 80px; /* Adjust the padding to create space for filters and user welcome msg */
+}
+
+.welcome-msg {
+  text-align: center;
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 10px;
 }
 
 .content {
-  overflow-x: auto;
+  overflow-y: auto; /* Make the table scrollable */
+  max-height: calc(100vh - 200px); /* Adjust the height based on your layout and filters height */
 }
-.ant-table-thead > tr > th,
-.ant-table-tbody > tr > td {
-  white-space: nowrap;
-}
-
-/* Add more responsive styling as needed */

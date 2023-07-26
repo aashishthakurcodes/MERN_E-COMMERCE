@@ -18,7 +18,7 @@ const Homepage = () => {
   const [showModel, setShow] = useState(false);
   const [loading, setLoading] = useState(false);
   const [getData, setData] = useState([]);
-  const [frequency, setFrequency] = useState("7");
+  const [frequency, setFrequency] = useState("365");
   const [selectDate, setSelectDate] = useState([]);
   const [type, setType] = useState("all");
   const [viewData, setViewData] = useState("table");
@@ -83,6 +83,7 @@ const Homepage = () => {
         });
         setLoading(false);
         message.success("Transaction Edit successfully");
+        window.location.reload();
       } else {
         await axios.post("/transections/add-data", {
           ...values,
@@ -91,8 +92,10 @@ const Homepage = () => {
         setLoading(false);
         message.success("Transaction Added successfully");
       }
+
       setShow(false);
       setEditable(null);
+      window.location.reload();
     } catch (error) {
       setLoading(false);
       message.error("Faild to add transection");
@@ -130,6 +133,7 @@ const Homepage = () => {
       await axios.post("/transections/delete", { transectionId: record._id });
       setLoading(false);
       message.success("Transection  deleted successfully");
+      window.location.reload();
     } catch (error) {
       console.log(error);
       setLoading(false);
@@ -155,7 +159,7 @@ const Homepage = () => {
             >
               <Select.Option value="7">Last 1 Week</Select.Option>
               <Select.Option value="30">Last 1 month</Select.Option>
-              <Select.Option value="365">Last 1 Year</Select.Option>
+              <Select.Option value="365">All</Select.Option>
               <Select.Option value="custom">Custom</Select.Option>
             </Select>
           </div>

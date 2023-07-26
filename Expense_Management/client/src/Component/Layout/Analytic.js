@@ -45,7 +45,7 @@ const Analytic = ({ getData }) => {
   return (
     <div>
       {/* div _01 */}
-      <h3>Graph Analytics</h3>
+      <h3 style={{textAlign:"center"}}>Graph Analytics</h3>
       <div className="wrapper">
       <div className="progress_01">
         <div className="progress_main">
@@ -100,10 +100,10 @@ const Analytic = ({ getData }) => {
 
         {/* div -03 */}
         
-      <div className="categroy">
+      <div className="category">
         <div className="category_data">
           <div className="progress_main">
-          <h2>Categories wise income</h2>
+          <h2 className="category_heading">Categories wise income</h2>
           </div>
           {categories.map((category) => {
             const amount = getData
@@ -132,10 +132,10 @@ const Analytic = ({ getData }) => {
         </div>
 
  {/* Expense */}
-         <div className="categroy">
+         <div className="category">
         <div className="category_data">
           <div className="progress_main">
-          <h2>Categories wise Expense</h2>
+          <h2 className="category_heading">Categories wise Expense</h2>
           </div>
           {categories.map((category) => {
             const amount = getData
@@ -152,7 +152,7 @@ const Analytic = ({ getData }) => {
                     <h3>{category}</h3>
                     <Progress
                     strokeColor={"red"}
-                      percent={((amount / totalIncomeTurnover) * 100).toFixed(
+                      percent={((amount / totalExpenseTurnover) * 100).toFixed(
                         0
                       )}
                     />
