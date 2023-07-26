@@ -182,7 +182,7 @@ const Homepage = () => {
           </Select>
           </div>
         </div>
-
+        </div>
         <div className="charts">
           <div>
             <UnorderedListOutlined onClick={() => setViewData("table")} />
@@ -190,23 +190,21 @@ const Homepage = () => {
             <div>
             <AreaChartOutlined onClick={() => setViewData("chart")} />
             </div>
-          
-         
-        </div>
-
-
         <div>
             <button className="addbtn" onClick={() => setShow(true)}>Add New </button>
           </div>
+          </div>
       </div>
-      </div>
+
       <div className="userData">
+        <div className="content-wrapper">
         <div className="content">
           {viewData === "table" ? (
             <Table columns={columns} dataSource={getData} />
           ) : (
             <Analytic getData={getData} />
           )}
+        </div>
         </div>
       </div>
 

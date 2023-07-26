@@ -1,39 +1,60 @@
 /* Homepage.css */
 
-.homepage{
+.homepage {
   border: 2px solid red;
-  overflow: hidden;
-  margin-top: 15px; 
-}
-.filters {
+  margin-top: 100px;
   display: flex;
-  flex-direction: column;
-  gap: 10px;
-  padding: 20px;
+  /* flex-direction: column; */
+  position: sticky;
+  top: 100px; /* This will fix the filters section at the top of the viewport */
   background-color: #f0f0f0;
-  align-items: center;
-  /* border: 2px solid red; */
+  justify-content: space-between;
+  padding: 5px 0px;
 }
 
-.frequency,
-.charts,
-.addbtn {
+.filters {
+  /* border: 2px solid blue; */
+  padding: 10px;
+  position: sticky;
+  top: 120px; /* This will fix the filters section at the top of the viewport */
+  background-color: #f0f0f0;
   display: flex;
-  justify-content: center;
+  gap: 40px;
+  padding: 0px 20px;
+}
+.charts{
+  /* border: 2px solid yellow; */
+  display: flex;
   align-items: center;
-  /* border: 2px solid rgb(0, 102, 255); */
-  gap: 10px;
+  padding: 0px 20px;
+  
+}
+.userData{
+
+  margin-top: 15px;
+  border: 2px solid brown;
+  overflow: hidden;
+  height: 300px;
 }
 
 .filters .frequency,
 .filters .charts,
 .filters .addbtn {
-  flex-basis: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
 }
-.charts{
+
+.frequency {
   gap: 20px;
 }
-.addbtn{
+
+.charts {
+  gap: 20px;
+}
+
+.addbtn {
   background: rgb(54, 124, 216);
   color: #ffff;
   padding: 8px 10px;
@@ -41,43 +62,51 @@
   border-radius: 5px;
   cursor: pointer;
 }
-.addbtn:hover{
+
+.addbtn:hover {
   background: rgb(102, 158, 233);
-}
-
-@media screen and (min-width: 768px) {
-  /* Adjust the layout for larger screens */
-  .filters {
-    flex-direction: row;
-  }
-
-  .filters .frequency,
-  .filters .charts,
-  .filters .addbtn {
-    flex-basis: auto;
-   gap: 10px;
-  }
-
-  .frequency {
-    gap: 20px;
-  }
-
-  .charts {
-    margin-left: auto;
-    
-  }
 }
 
 .userData {
   padding: 20px;
+  overflow-x: scroll;
 }
 
-.content {
-  overflow-x: auto;
+.content-wrapper {
+  /* Set the desired height for the table body wrapper */
+  max-height: 300px;
+  overflow-y: auto;
 }
-.ant-table-thead > tr > th,
-.ant-table-tbody > tr > td {
+
+.ant-table-thead > tr > th {
   white-space: nowrap;
+  position: sticky;
+  top: 0; /* This will fix the table heading at the top of the table when scrolling */
+  background-color: #f0f0f0;
+  z-index: 1; /* Ensure the heading is above the table body while scrolling */
 }
 
-/* Add more responsive styling as needed */
+@media screen and (max-width:450px) {
+ .homepage{
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 0px 0px;
+ 
+ }
+ .filters{
+  flex-direction: column;
+  gap: 5px;
+  padding: 0px;
+ }
+ .charts{
+  justify-content: center;
+  margin-top: 20px;
+  align-items: center;
+  padding: 5px;
+ }
+ .addbtn{
+  padding: 6px 8px;
+ }
+}
+

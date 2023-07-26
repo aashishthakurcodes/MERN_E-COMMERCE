@@ -15,7 +15,8 @@ const Footer = () => {
         </div>
 
        
-        <div className='icons'><InstagramOutlined/>
+        <div className='icons'>
+          <InstagramOutlined/>
         <FacebookOutlined/>
         <TwitterOutlined/>
         </div>

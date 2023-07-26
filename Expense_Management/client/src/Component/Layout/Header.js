@@ -30,9 +30,9 @@ const Header = () => {
         <button className="logout_btn" onClick={logoutHandler}>Logout</button>
         </div>
       </nav>
-      <div className="container">
+      {/* <div className="container">
           <span>Welcome {loginUser && loginUser.name}</span>
-        </div>
+        </div> */}
     </div>
   );
 };
