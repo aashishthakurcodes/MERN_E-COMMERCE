@@ -4,6 +4,7 @@ const morgan = require('morgan');
 const colors = require('colors');
 const dotenv = require('dotenv');
 const connectDB = require('./config/connectDB');
+const path=require('path')
 
 // config
 dotenv.config();
@@ -24,6 +25,12 @@ app.use(cors()); // Enable CORS for all domains. You can specify specific domain
 app.use("/api/v1/users", require("./routes/userRoutes"));
 // Transection Routes
 app.use("/api/v1/transections", require("./routes/transactionRoute"));
+
+app.use(express.static(path.join(__dirname, './client/build')))
+
+app.get('*',function(req,res){
+  res.sendFile(path.join(__dirname,'./client/build/index.html'))
+})
 
 // PORT
 const PORT = process.env.PORT || 8080;

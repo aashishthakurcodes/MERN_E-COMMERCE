@@ -13,6 +13,8 @@
   /* background: rgba(0, 0, 0, 0.8); */
   color: #ffff;
   background:#ffff;
+  max-width: 1400px;
+  margin: auto;
 
 }
 
@@ -45,3 +47,4 @@
   .logout_btn:hover{
     background: rgb(107, 107, 209); 
   }
+ 

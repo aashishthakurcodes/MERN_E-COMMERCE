@@ -74,7 +74,7 @@ const Homepage = () => {
       console.log("User ID:", user._id);
       setLoading(true);
       if (editable) {
-        await axios.post("/transections/edit", {
+        await axios.post("/api/v1/transections/edit", {
           payload: {
             ...values,
             userId: user._id,
@@ -82,15 +82,22 @@ const Homepage = () => {
           transectionId: editable._id,
         });
         setLoading(false);
+
         message.success("Transaction Edit successfully");
-        window.location.reload();
+        setTimeout(() => {
+          window.location.reload();
+        }, 1000);
       } else {
-        await axios.post("/transections/add-data", {
+        await axios.post("/api/v1/transections/add-data", {
           ...values,
           userid: user._id,
         });
         setLoading(false);
+
         message.success("Transaction Added successfully");
+        setTimeout(() => {
+          window.location.reload();
+        }, 1000); 
       }
 
       setShow(false);
@@ -109,7 +116,7 @@ const Homepage = () => {
       try {
         const user = JSON.parse(localStorage.getItem("user"));
         setLoading(true);
-        const res = await axios.post("/transections/getall", {
+        const res = await axios.post("/api/v1/transections/getall", {
           userid: user._id,
           frequency,
           selectDate,
@@ -130,10 +137,13 @@ const Homepage = () => {
   const handleDelete = async (record) => {
     try {
       setLoading(true);
-      await axios.post("/transections/delete", { transectionId: record._id });
+      await axios.post("/api/v1/transections/delete", { transectionId: record._id });
       setLoading(false);
       message.success("Transection  deleted successfully");
-      window.location.reload();
+      setTimeout(() => {
+        window.location.reload();
+      }, 1000);
+    
     } catch (error) {
       console.log(error);
       setLoading(false);
@@ -149,62 +159,66 @@ const Homepage = () => {
         </div>
       )}
       <div className="homepage">
-      <div className="filters">
-        <div className="frequency">
-          <div>Select Frequency</div>
+        <div className="filters">
+          <div className="frequency">
+            <div>Select Frequency</div>
 
-          <div>
-            <Select
-              value={frequency}
-              onChange={(values) => setFrequency(values)}
-            >
-              <Select.Option value="7">Last 1 Week</Select.Option>
-              <Select.Option value="30">Last 1 month</Select.Option>
-              <Select.Option value="365">All</Select.Option>
-              <Select.Option value="custom">Custom</Select.Option>
-            </Select>
+            <div>
+              <Select
+                value={frequency}
+                onChange={(values) => setFrequency(values)}
+              >
+                <Select.Option value="7">Last 1 Week</Select.Option>
+                <Select.Option value="30">Last 1 month</Select.Option>
+                <Select.Option value="365">All</Select.Option>
+                <Select.Option value="custom">Custom</Select.Option>
+              </Select>
+            </div>
+            {frequency === "custom" && (
+              <RangePicker
+                value={selectDate}
+                onChange={(values) => setSelectDate(values)}
+              />
+            )}
           </div>
-          {frequency === "custom" && (
-            <RangePicker
-              value={selectDate}
-              onChange={(values) => setSelectDate(values)}
-            />
-          )}
-        </div>
 
-        <div  className="frequency">
-          <div>Select Type</div>
-          <div>
-          <Select value={type} onChange={(values) => setType(values)}>
-            <Select.Option value="all">All</Select.Option>
-            <Select.Option value="income">Income</Select.Option>
-            <Select.Option value="expense">Expense</Select.Option>
-          </Select>
+          <div className="frequency">
+            <div>Select Type</div>
+            <div>
+              <Select value={type} onChange={(values) => setType(values)}>
+                <Select.Option value="all">All</Select.Option>
+                <Select.Option value="income">Income</Select.Option>
+                <Select.Option value="expense">Expense</Select.Option>
+              </Select>
+            </div>
           </div>
-        </div>
         </div>
         <div className="charts">
           <div>
             <UnorderedListOutlined onClick={() => setViewData("table")} />
-            </div>
-            <div>
+          </div>
+          <div>
             <AreaChartOutlined onClick={() => setViewData("chart")} />
-            </div>
-        <div>
-            <button className="addbtn" onClick={() => setShow(true)}>Add New </button>
           </div>
+          <div>
+            <button className="addbtn" onClick={() => setShow(true)}>
+              Add New{" "}
+            </button>
           </div>
+        </div>
       </div>
 
-      <div className="userData">
-        <div className="content-wrapper">
-        <div className="content">
-          {viewData === "table" ? (
-            <Table columns={columns} dataSource={getData} />
-          ) : (
-            <Analytic getData={getData} />
-          )}
-        </div>
+      <div className="user_wrapper">
+        <div className="userData">
+          <div className="content-wrapper">
+            <div className="content">
+              {viewData === "table" ? (
+                <Table columns={columns} dataSource={getData} />
+              ) : (
+                <Analytic getData={getData} />
+              )}
+            </div>
+          </div>
         </div>
       </div>
 

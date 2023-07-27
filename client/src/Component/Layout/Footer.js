@@ -15,11 +15,11 @@ const Footer = () => {
         </div>
 
        
-        <div className='icons'>
+        {/* <div className='icons'>
           <InstagramOutlined/>
         <FacebookOutlined/>
         <TwitterOutlined/>
-        </div>
+        </div> */}
        
 
       </div>

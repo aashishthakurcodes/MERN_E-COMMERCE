@@ -1,3 +1,3 @@
 # MERN Project
-## Commit Checking  project
+## Expense Manager Appp
 

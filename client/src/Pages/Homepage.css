@@ -1,7 +1,7 @@
 /* Homepage.css */
 
 .homepage {
-  border: 2px solid red;
+  /* border: 2px solid red; */
   margin-top: 100px;
   display: flex;
   /* flex-direction: column; */
@@ -16,7 +16,7 @@
   /* border: 2px solid blue; */
   padding: 10px;
   position: sticky;
-  top: 120px; /* This will fix the filters section at the top of the viewport */
+  top: 100px; /* This will fix the filters section at the top of the viewport */
   background-color: #f0f0f0;
   display: flex;
   gap: 40px;
@@ -29,13 +29,25 @@
   padding: 0px 20px;
   
 }
+
 .userData{
 
   margin-top: 15px;
-  border: 2px solid brown;
-  overflow: hidden;
+  border: 2px solid rgb(0, 0, 0);
+  position: fixed;
+  top: 150px;
+  bottom: 10px;
+  width: 100%;
   height: 300px;
+  
 }
+/* .user_wrapper{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border: 3px solid green;
+  height: 500px;
+} */
 
 .filters .frequency,
 .filters .charts,
@@ -74,7 +86,7 @@
 
 .content-wrapper {
   /* Set the desired height for the table body wrapper */
-  max-height: 300px;
+  max-height: 400px;
   overflow-y: auto;
 }
 
@@ -96,17 +108,31 @@
  }
  .filters{
   flex-direction: column;
-  gap: 5px;
+  gap: 3px;
   padding: 0px;
  }
  .charts{
   justify-content: center;
-  margin-top: 20px;
+  margin-top: 10px;
   align-items: center;
   padding: 5px;
  }
  .addbtn{
   padding: 6px 8px;
  }
+ .userData{
+  top: 220px;
+  height: 400px;
+ }
+
 }
 
+@media screen and (min-width: 688px) and (max-width: 1031px){
+    .userData{
+      height: 700px;
+    }
+    .content-wrapper{
+      max-height: 500px;
+      /* border: 2px solid red; */
+    }
+}
